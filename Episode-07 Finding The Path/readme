@@ -1,0 +1,70 @@
+our route we will use ReactRouter
+
+// react application are single page application as every thing is component in react
+//you have to navigate through the page your browser will not load ,this is known as single page application
+Reactrouter.com/en/main
+just the components get interchanged at the client side routing 
+
+
+npm install react-router-dom
+let create the about us Page 
+if we write /about it should move to the about page
+
+rafce 
+
+on rndom url it will throw an error  
+
+when we are moving to the about us and contact page we are losing the header and footer 
+i want to keep my header intact 
+Now we see children route inside the route
+
+There are two types of routing in web apps
+a)Client Side ROUTING B)Server side Routing 
+
+
+if i click on the anchor tag /about ,it reloads the whole page ,it sends the networks call to the about.html
+fetches that html  and renders that  to the web page 
+
+This is server side routing 
+
+You make the networks call and about.html is coming from the server 
+1)Client Side Routing 
+
+All the components are loaded for the app
+when i loaded the app for the first time ,it already has the code for about ,it will just load that componet 
+i am not fetching the new page 
+2)Server side Routing-you make the network call and page is coming from the server
+
+index.html 
+about.html 
+contact.html 
+
+if i click on the anchor tag  ./about it reload the whole page ,it sends the  network call to the about.hml 
+fetches  that html  and render  that  web page  
+we are not making any network call 
+all the components are loaded  in our side 
+
+Why react is single page application ?
+
+one page  just components is getting interchanged via client side routing 
+// we are going to make f=differnt page for different restaurant 
+
+We will see how dynamic routing work 
+/restaurant/meghanafood
+/restaurant/coffeehouse
+
+we have dynamic route for different restaurant
+
+
+
+now our task is to make our application functional 
+
+
+We will make different pages for  the different restaurant
+
+Behind the scene link uses anchor tag
+Link is a wrapper over anchor tag 
+
+React dom keep track the home is a link not a anchor tag 
+
+

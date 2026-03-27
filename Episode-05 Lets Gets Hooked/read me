@@ -1,0 +1,550 @@
+it is not good practice to put all files in the single code 
+We will break th  code to restructure it 
+
+All the main code is put under the src folder ( a kind of source code )
+I will put  the app.js folder in the src folder now i have to change the path of it index.html
+
+It is better to make sepearte file to each component ,
+Parcel will take all the code and minimalise it under one file
+
+in real world ,there could be 1000 of components
+Someone can keep on the basis of the feature basis as well 
+like Search feature 
+
+
+root folder structure 
+in the documentation it is does not say what does it matter 
+
+
+Grouping by features or routes 
+
+<!-- 1)Common
+2)Feed
+3)Profile  -->
+
+
+Or on the basis of the type as well
+
+Sometimes they save js file as jsx
+
+
+There are two types of export named export and default export see the code in src 
+
+Two types of Export/Import 
+
+-Default Export/Import
+
+export default componentname;
+import Component from "path";
+
+-Named Export/Import 
+
+export  const Component;
+import {Component} from "path";
+
+
+in uber Each component must be as small and clean 
+around 100 lines of code 
+
+<!-- const Body =() =>{
+  const ListOfRestaurants=[
+   {
+    info: {
+      id: "10894",
+      name: "Pizza Hut",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000,
+      cuisines: ["Pizzas","Burger","Biryani","American","Snacks","FastFood"],
+      avgRating: "4.1",
+      deliveryTime: 31,
+    },
+  },
+  {
+    info: {
+      id: "10891",
+      name: "Dominos",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000,
+      cuisines: ["Pizzas"],
+      avgRating: "4.5",
+      deliveryTime: 31,
+    },
+  },
+  ];
+  return (
+    <div className="body">
+      <div className="filter">
+        <button className="filter-btn"
+        
+        onClick={()=>{console.log("Button Clicked")}}
+        onMouseOver={()=>{console.log("Button Clicked")}}
+        >Top rated Restaturant</button>
+      </div>
+      <div className="res-container">
+      <div className="res-container">
+       {
+        ListOfRestaurants.map((restaurant) => (
+      <RestaurantCard 
+        key={restaurant.info.id}
+        resData={restaurant} 
+      />
+    ))
+     }
+    </div>
+      </div>
+    </div>
+  )
+};
+
+export default Body; -->
+
+
+
+//Wrote the logic of filtering but Ui is not getting updated 
+
+
+
+<!-- import RestaurantCard from "./RestaurantCard";    
+import resObj from "../utils/mockData";
+
+//card is coming from resobj
+// on Click we take the call back functions
+
+const Body =() =>{
+  let ListOfRestaurants=[
+   {
+    info: {
+      id: "10894",
+      name: "Pizza Hut",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000,
+      cuisines: ["Pizzas","Burger","Biryani","American","Snacks","FastFood"],
+      avgRating: "4.1",
+      deliveryTime: 31,
+    },
+  },
+  {
+    info: {
+      id: "10891",
+      name: "Dominos",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000,
+      cuisines: ["Pizzas"],
+      avgRating: "3.8",
+      deliveryTime: 31,
+    },
+  },
+
+  {
+    info: {
+      id: "10897",
+      name: "MCdONALD",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000,
+      cuisines: ["Pizzas"],
+      avgRating: "4.1",
+      deliveryTime: 31,
+    },
+  },
+  ];
+  return (
+    <div className="body">
+      <div className="filter">
+        <button className="filter-btn"
+        
+        onClick={()=>{ 
+          //Filter logic here 
+
+          ListOfRestaurants=ListOfRestaurants.filter(
+            (res)=> res.info.avgRating>4
+          );
+          console.log(ListOfRestaurants);
+        }}
+        
+        >Top rated Restaturant</button>
+      </div>
+      <div className="res-container">
+      <div className="res-container">
+       {
+        ListOfRestaurants.map((restaurant) => (
+      <RestaurantCard 
+        key={restaurant.info.id}
+        resData={restaurant} 
+      />
+    ))
+     }
+    </div>
+      </div>
+    </div>
+  )
+};
+
+export default Body; -->
+
+<!-- // React is effificent in React dom manipulation 
+//Ui and data layer should work together (updating the dom manipulation)
+//There is a concept of virtual dom 
+
+
+// React Hooks
+(Normal Js function 
+)
+npm install react we have got  all the utility function 
+react hook is normal javascript function
+
+There are two important function 
+-->UseState()
+useEffect()
+
+This is used to generate super powerful state variable
+
+Example of filtering 
+Whenever a state variable react render the component
+
+<!-- import RestaurantCard from "./RestaurantCard";    
+import {useState} from "react";
+
+Function component -- normal javascript function
+React Elemet -- javascript object 
+React Hook is a normal function is given to us by Reacy ,prebuilt given by react ,we can used it directly
+
+card is coming from resobj
+on Click we take the call back functions
+
+State Variables -Sper powerful variable 
+
+For that we use hooks (useState)
+USESTATE IS TO CREATE THE STATE VARIABLE IT WILL MAINTAIN THE STATE OF THE COMPONENT
+LOCAL STATE VARIABLE SCOPE IS INSIDE THE COMPONENT
+Keeps the layer sink with the ui 
+
+
+
+
+const Body =() =>{
+
+  // whatever the value we will pass in the useState will become the default of const here 
+  // const [listOfRestaurants]=useState([null]);
+  const [listOfRestaurants,setListOfRestaurants]=useState([
+    {
+    info: {
+      id: "10894",
+      name: "Pizza Hut",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000/100,
+      cuisines: ["Pizzas","Burger","Biryani","American","Snacks","FastFood"],
+      avgRating: 4.1,
+      deliveryTime: "31 minutes",
+    },
+  },
+  {
+    info: {
+      id: "10891",
+      name: "Dominos",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000/100,
+      cuisines: ["Pizzas"],
+      avgRating: 3.8 ,
+      deliveryTime: "31 minutes",
+    },
+  },
+
+  {
+    info: {
+      id: "10897",
+      name: "MCdONALD",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      costForTwo:40000/100,
+      cuisines: ["Pizzas"],
+      avgRating: 4.1,
+      deliveryTime: "31 minutes",
+    },
+  }
+  ]);
+
+
+//Normal Js VARIABLE
+//  let listOfRestaurants=null
+  // let listOfRestaurantsJS=[
+  //  {
+  //   info: {
+  //     id: "10894",
+  //     name: "Pizza Hut",
+  //     cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+  //     costForTwo:40000,
+  //     cuisines: ["Pizzas","Burger","Biryani","American","Snacks","FastFood"],
+  //     avgRating: "4.1",
+  //     deliveryTime: 31,
+  //   },
+  // },
+  // {
+  //   info: {
+  //     id: "10891",
+  //     name: "Dominos",
+  //     cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+  //     costForTwo:40000,
+  //     cuisines: ["Pizzas"],
+  //     avgRating: "3.8",
+  //     deliveryTime: "31 minutes",
+  //   },
+  // },
+
+  // {
+  //   info: {
+  //     id: "10897",
+  //     name: "MCdONALD",
+  //     cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+  //     costForTwo:40000,
+  //     cuisines: ["Pizzas"],
+  //     avgRating: "4.1",
+  //     deliveryTime: 31,
+  //   },
+  // },
+  // ];
+  // const list =[]
+  // lsit=["Abc"];
+  // list.push("Abc");
+  return (
+    <div className="body">
+      <div className="filter">
+        <button 
+        className="filter-btn"
+        
+        onClick={()=>{ 
+          //Filter logic here 
+
+          const filteredList=listOfRestaurants.filter(
+            (res)=> res.info.avgRating>4
+          );
+          setListOfRestaurants(filteredList);
+        }}
+        
+        >Top rated Restaturant</button>
+      </div>
+      <div className="res-container">
+      <div className="res-container">
+       {
+        listOfRestaurants.map((restaurant) => (
+      <RestaurantCard 
+        key={restaurant.info.id}
+        resData={restaurant} 
+      />
+    ))
+     }
+    </div>
+      </div>
+    </div>
+  )
+};
+
+export default Body; --> 
+
+React Hook is a javascript function a normal utility function 
+now we will use the mock date over here 
+
+React uses Reconcilation algorithm is also known as React Fibre
+
+Dom is like a tree 
+
+rescontainer has 7 restaurant CARD 
+MY UI CHANGES FROM 7 to 3 filtered cards 
+
+React create the virtual Dom for it (for the original one )
+it is not the actual dom 
+actual dom are the tag 
+virtual is the representation of the actual dom 
+
+Virtual Dom  is basically those react Elements
+
+console.log(<Body/>)
+
+
+<!-- return (
+    <div className="body">
+      <div className="filter">
+        <button 
+        className="filter-btn"
+        
+        onClick={()=>{ 
+          //Filter logic here 
+
+          const filteredList=listOfRestaurants.filter(
+            (res)=> res.info.avgRating>4
+          );
+          setListOfRestaurants(filteredList);
+        }}
+        
+        >Top rated Restaturant</button>
+      </div>
+      <div className="res-container">
+      <div className="res-container">
+       {
+        listOfRestaurants.map((restaurant) => (
+      <RestaurantCard 
+        key={restaurant.info.id}
+        resData={restaurant} 
+      />
+    ))
+     }
+    </div>
+      </div>
+    </div>
+  )
+}; -->
+How React Treat this Jsx as object
+React Element is an object 
+virtual Dom is nothing but javascricpt object 
+
+What is the Diff algorithm
+
+Find out the differnence between updated Virtual dom to original virtual dom 
+
+It tries out to find out the difference between new and old Virtaul dom 
+it willcalculate the the differnce and then it will actual update the dom it every render cycle
+
+
+it is a new algorithm (React fibre) came in react 2016 
+
+React fibre it is a new way of finding the div and updating the dom 
+
+Virtual dom is an obj 
+it is like the git diff 
+when it will find the diff them it will update the dom 
+
+
+Findout the difference between the two object is easy 
+and virtual dom make it quick
+
+when i click on the button new object is formed ,when it find the difference then only 
+it will update it 
+
+When there is change in state variable ,react will find out the differnece in dom and rerender the dom 
+
+
+Google : React Fibre  Architecture 
+
+This is the react core algorithm ,this is what react best at 
+react fibre is an ongoining research 
+
+Incremental rendering ---> it is effiency 
+Ability to split rendering work into chunks and spread
+
+
+Why rEACT IS FAST ?
+iT is doing efficient dom manipulation 
+
+Virtual Dom has become popular due to the react 
+
+Javascript dom representation 
+react took that and built their algorithm on it 
+
+
+
+1>Virtaul Dom efficient Dom manipulation 
+Reconcilation algorithm 
+
+
+<!-- 
+import RestaurantCard from "./RestaurantCard";    
+import {useState} from "react";
+import resObj from "../utils/mockData";
+
+//Function component -- normal javascript function
+//React Elemet -- javascript object 
+//React Hook is a normal function is given to us by Reacy ,prebuilt given by react ,we can used it directly
+
+//card is coming from resobj
+// on Click we take the call back functions
+
+// State Variables -Sper powerful variable 
+
+// For that we use hooks (useState)
+//USESTATE IS TO CREATE THE STATE VARIABLE IT WILL MAINTAIN THE STATE OF THE COMPONENT
+//LOCAL STATE VARIABLE SCOPE IS INSIDE THE COMPONENT
+// Keeps the layer sink with the ui 
+
+
+const Body =() =>{
+
+  // whatever the value we will pass in the useState will become the default of const here 
+  // const [listOfRestaurants]=useState([null]);
+  const [listOfRestaurants,setListOfRestaurants]=useState(resObj);
+    
+
+
+//Normal Js VARIABLE
+//  let listOfRestaurants=null
+  // let listOfRestaurantsJS=[
+  //  {
+  //   info: {
+  //     id: "10894",
+  //     name: "Pizza Hut",
+  //     cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+  //     costForTwo:40000,
+  //     cuisines: ["Pizzas","Burger","Biryani","American","Snacks","FastFood"],
+  //     avgRating: "4.1",
+  //     deliveryTime: 31,
+  //   },
+  // },
+  // {
+  //   info: {
+  //     id: "10891",
+  //     name: "Dominos",
+  //     cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+  //     costForTwo:40000,
+  //     cuisines: ["Pizzas"],
+  //     avgRating: "3.8",
+  //     deliveryTime: "31 minutes",
+  //   },
+  // },
+
+  // {
+  //   info: {
+  //     id: "10897",
+  //     name: "MCdONALD",
+  //     cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+  //     costForTwo:40000,
+  //     cuisines: ["Pizzas"],
+  //     avgRating: "4.1",
+  //     deliveryTime: 31,
+  //   },
+  // },
+  // ];
+  // const list =[]
+  // lsit=["Abc"];
+  // list.push("Abc");
+  return (
+    <div className="body">
+      <div className="filter">
+        <button 
+        className="filter-btn"
+        
+        onClick={()=>{ 
+          //Filter logic here 
+
+          const filteredList=listOfRestaurants.filter(
+            (res)=> res.info.avgRating>4
+          );
+          setListOfRestaurants(filteredList);
+        }}
+        
+        >Top rated Restaturant</button>
+      </div>
+      <div className="res-container">
+      <div className="res-container">
+       {
+        listOfRestaurants.map((restaurant) => (
+      <RestaurantCard 
+        key={restaurant.info.id}
+        resData={restaurant} 
+      />
+    ))
+     }
+    </div>
+      </div>
+    </div>
+  )
+};
+
+export default Body; -->
+
