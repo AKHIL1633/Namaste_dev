@@ -3,7 +3,7 @@
 import { LOGO_URL } from "../utils/constant";
 import { useState,useEffect } from "react";
 import {Link} from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus";
 // Link component works exactly the same as the anchor tag 
 // anchor tag we have href  <a href="/about">About us </a>
 // <Link to="/contact">Contact us </Link>
@@ -48,10 +48,11 @@ import {Link} from "react-router-dom";
 
 
 const Header =()=>{
-  useEffect(()=>{
-  console.log("useEffect called");
-   });
+  // useEffect(()=>{
+  // console.log("useEffect called");
+  //  });
   const[btnNameReact,setBtnNameReact]=useState("Login");
+  const onlineStatus=useOnlineStatus();
   console.log("Header render ");
   return (
     <div className="header">
@@ -61,13 +62,19 @@ const Header =()=>{
     <div className="nav-items">
       <ul>
         <li>
+          Online Status: {onlineStatus ? "👌":"😡"}
+        </li>
+        <li>
           <Link to="/">Home</Link></li>
         <li>
           <Link to="/about">About us</Link></li>
         <li>
           <Link to="/contact">Contact us</Link> 
           </li>
-        <li>Card</li>
+        <li>
+          <Link to="/grocery">Grocery</Link> 
+          </li>
+        <li>Cart</li>
 
         <button 
         className="login" 

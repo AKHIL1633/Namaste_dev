@@ -2,11 +2,18 @@ import { useEffect } from "react";
 import Shimmer from "./Shimmer";
 import {useParams} from "react-router-dom";
 import  { MENU_API } from "../utils/constant";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+
+// fetching the data and display the data in the ui 
+// it should nt worry fetching the day 
+// we had a use parms hook give us the res id we dont what is the code was written besides it
+
+// creating custom hook is not a compilsory but it will make our code more readable and modular
 const RestaurantMenu = () => {
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-const [restInfo,setResInfo]=useState(null);
+//   useEffect(() => {
+//     fetchMenu();
+//   }, []);
+// const [restInfo,setResInfo]=useState(null);
 
 // parmas is the id with resid
 // const params=useParams();
@@ -33,15 +40,24 @@ console.log(params);
 //     console.log("Error:", err.message);
 //   }
 // };
-const fetchMenu=async () =>{
-    const data=await fetch (MENU_API + resId);
-    const json =await data.json();
+// it will give res.info of the restaurant 
 
-    console.log(json);
-    setResInfo(json.data);
-    // to store the data we need to used state variable 
+// const fetchMenu=async () =>{
+//     const data=await fetch (MENU_API + resId);
+//     const json =await data.json();
 
-};
+//     console.log(json);
+//     setResInfo(json.data);
+//     // to store the data we need to used state variable 
+
+// };
+// RestaurantMenu is a  custom hook
+//custom hook (RestaurantMenu),we will create the hook which will fetch the data and give it to the restaturant menu
+//for that particular restaturant i,it will fetch that info 
+//this hook will do black magic ,it means how we are fetching the data 
+//hook are nothing but helper functions 
+
+const resInfo=useRestaurantMenu(resId);
 
 if(resInfo === null)<Shimmer/>
 // it is better to use graph ql

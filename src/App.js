@@ -1,13 +1,31 @@
-import React  from "react" ;
+import React ,{ lazy,Suspense}from "react" ;
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from  "./components/Body";
 import RestaurantCard from "./components/RestaurantCard";
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom";
-import  About from "./components/About";
+// import  About from "./components/About";
 import  Contact  from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+// import Grocery from "./components/Grocery";
+
+
+//lazy loading 
+
+//when our app load intially  ,app home page will load  not load the code for grocery 
+//only when i go to the grocery page then only we will load that code
+
+// we will loading when we are required
+// lazy is a function which is given by react to us
+// it will come from the react library
+//it is a one line code ,it is lot of power ,it can do magical things
+//grocery.js has its own code 
+//initially grocery code not there when we click on it we will get the error 
+//it will take some time ,but react will try to render at that time we wil get error
+// so we have to make use of Suspense
+const Grocery=lazy(() => import("./components/Grocery") );
+const About=lazy(() => import("./components/About") );
 
 //create browser Router will vreate the routing configuration for us 
 // it will list of paths (paths is nothing but an object)
@@ -79,11 +97,15 @@ const appRouter=createBrowserRouter([
     },
     {
     path:"/about",
-    element:<About/>
+    element:<Suspense fallback={<h1>Loading....</h1>}><About/></Suspense>
     },
     {
     path:"/contact",
     element:<Contact/>,
+  },
+  {
+      path :"/grocery",
+      element:<Suspense fallback={<h1>Loading....</h1>}><Grocery/></Suspense>,
   },
   {
     path :"/restaurants/:resId",

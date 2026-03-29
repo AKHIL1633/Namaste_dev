@@ -1,0 +1,189 @@
+class based component is an older way to create components
+a react never need to use now 
+Class based component are very important to know
+it is important to know older project have class based components
+
+understanding of the react become very strong 
+it will tell you the how the react lifecycle work 
+
+What is the reactlifecycle ?
+it is one of the most interview question 
+How is the compoent is mounted on the web page 
+
+Loading or mounting 
+Component is mounting on the web page 
+
+We have ABOUT.JS is a parent 
+when this is mounted on the web  page 
+so it will start redering the jsx 
+
+
+<!-- return (
+        <div>
+            <h1>About</h1>
+            <h2>This is Namaste React Web Series </h2>
+            {/* <User name={"Akshay Saini(function)"}/> */}
+            <UserClass name={"Akshay Saini (class)"} location={"Dehradun Class"}/>
+        </div>
+    ); -->
+
+it see  useclass over there which is imported from user class
+parent is mounted
+as soon it starts to load user class 
+about is a parent class
+userclass is a class inside it 
+
+it strts loading the class based component  ,it will go the class based component
+now the new instance of the class is created  
+what happen when the class is initiated 
+the constuctor is called ,then render is called in the class based component 
+
+
+
+
+When the About Component is loaded the parent component 
+it will initalise the new instance of the class ,the constructor of the parent is called 
+then the render of the parent is called then it will go to the children 
+then the constructor of the child will be called 
+and then the render of the child is called 
+
+
+Parent Constructor 
+Parent render
+Child Constructor
+Child Render 
+
+
+
+Classbased component has another method  
+which we called as componentDidMount
+This is another method which react class based give to us 
+when the component is loaded ,constructor is called then the render method is called
+when the classed based componet is mounted on the dom ,then this method is called 
+
+This is the lifecycle of the react component
+constructor
+render
+mount 
+
+if we have componentdidmount inside our parent component as well 
+Final Outout is 
+Parent constructor
+Parent Render 
+Child Constructor 
+Child Render 
+Child Component Did Mount 
+Parent component Did mount 
+
+
+
+This is the life cycle of Parent cycle relationship 
+
+
+componentDidMount is used to make api calls 
+it has to make inside this compinent only
+
+in react component if we make the api call,
+we want to render the component once make the api call and fill the component 
+We  dont wait for the api to return the data to render the componernt
+
+react quickly want to render the component as fast as possible 
+
+
+if we have two instance of the class in the about.js 
+
+<!-- 
+<UserClass name={"Akshay Saini (class)"} location={"Dehradun Class"}/>
+<UserClass name={"Akshay Saini (class)"} location={"Dehradun Class"}/> -->
+in the About.js
+
+
+
+// This is wrong totally
+
+Parent Constructor
+Parent Render 
+Akshay Constructor 
+Akshay Render 
+Akshay ComponentDidMount 
+Elon Musk Constructor
+Elon Musk Render
+Elon Musk ComponentDidMount
+Parent ComponentDidMount 
+
+// React is not confusing it is just optimising 
+
+
+-Parent Constructor
+-Parent Render
+
+    -Akshay Saini (class)Child Constructor
+    -Akshay Saini (class)Child Render
+
+    -Elon Musk Child Constructor
+    -Elon Musk Child Render
+    
+     <Dom Updated - in Single Batch >
+    -Akshay Sainin(class) Child Component Did mount
+    -Elon Musk Child Component Did mount 
+
+Parent Component Did mount 
+
+
+https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+here we have the lifcecycle diagram of the react 
+
+
+in the react when the compount is mounted it is mounted in two phases 
+react is fast because it has two phases 
+render phase 
+commit phase 
+
+
+Mounting Phase --->
+For every parent and child this happen 
+
+Construtor is called 
+render is called 
+then react update the dom 
+component did mount is called 
+
+
+About will start the mounting phase 
+when the  about happen 
+constructor will be printed 
+Parent render will happen
+
+it goes to the child 
+it starts the lifecycle of the child
+As there is two child react will optimise it
+it will batch the render phase  for this two child 
+this  two child render phase will happen 
+
+First child constructor will be called
+First child render will be called 
+Second child constructor will be called
+Seconder child render phase will be called 
+
+Dom manipulation is expensive generally 
+react is trigerrring the reconcilation process and  it happen in the render phase 
+React try to batch up the things for dom manipulation 
+
+
+https://docs.github.com/en/rest/users?apiVersion=2026-03-10
+to get the github user api 
+
+https://api.github.com/users/AKHIL1633
+IT WILL RETURN THE DATA 
+
+// 
+
+
+
+
+
+
+
+
+
